@@ -47,4 +47,4 @@ def process_image(image_path, weight_class, scale_pixels_per_inch):
     cv2.imwrite(out_img_path, img)
 
     pd.DataFrame(results).to_csv(os.path.join("outputs", "measurements.csv"), index=False)
-    return results, out_img_path
+    return results, out_img_path, len(diamonds)

@@ -57,9 +57,10 @@ def inspect_mesh(request):
         return JsonResponse({'error': f'Failed to extract ruler: {str(e)}'}, status=400)
 
     # Process mesh detection
-    results, output_path = process_image(image_path, weight_class, scale)
+    results, output_path, total_diamonds = process_image(image_path, weight_class, scale)
 
     return JsonResponse({
         "measurements": results,
-        "annotated_image": output_path
+        "total_diamonds": total_diamonds,
+        "annotated_image": output_path,
     })
