@@ -59,9 +59,10 @@ def inspect_mesh(request):
 
     # Process mesh detection
     # results, output_path, total_diamonds = process_image(image_path, weight_class, scale)
-    total_diamonds,output_path  = detect_and_annotate_diamonds(image_path)
+    results,total_diamonds,output_path  = detect_and_annotate_diamonds(image_path,weight_class, scale)
 
     return JsonResponse({
+        "measurements": results,
         "total_diamonds": total_diamonds,
         "annotated_image": output_path,
     })
