@@ -16,9 +16,15 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.conf.urls.static import static
+
+
+from mesh_django import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('mesh/', include('mesh_inspector.urls')),
 ]
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
 

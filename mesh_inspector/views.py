@@ -2,6 +2,7 @@ from django.http import JsonResponse
 from rest_framework.decorators import api_view
 
 from mesh_django import settings
+from mesh_inspector.count import detect_and_annotate_diamonds
 from .utils import process_image
 import os
 import cv2
@@ -57,10 +58,10 @@ def inspect_mesh(request):
         return JsonResponse({'error': f'Failed to extract ruler: {str(e)}'}, status=400)
 
     # Process mesh detection
-    results, output_path, total_diamonds = process_image(image_path, weight_class, scale)
+    # results, output_path, total_diamonds = process_image(image_path, weight_class, scale)
+    total_diamonds,output_path  = detect_and_annotate_diamonds(image_path)
 
     return JsonResponse({
-        "measurements": results,
         "total_diamonds": total_diamonds,
         "annotated_image": output_path,
     })
